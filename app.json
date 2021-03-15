@@ -1,0 +1,12 @@
+{
+  "name": "patcher_app",
+  "displayName": "patcher_app",
+  "expo": {
+    "name": "patcher_app",
+    "slug": "patcher_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
