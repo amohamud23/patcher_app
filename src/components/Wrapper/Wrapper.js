@@ -24,10 +24,10 @@ export default connect(mapStateToProps)(Wrapper);
 
 const styles = StyleSheet.create({
   screen: {
-    paddingHorizontal: "5%",
     flex: 1,
   },
   body: {
     flex: 1,
+    paddingHorizontal: "5%",
   },
 });
