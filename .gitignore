@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+*Google
 
 # Android/IntelliJ
 #
@@ -63,3 +64,7 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+# Firebase files
+ios/GoogleService-Info.plist
+android/app/google-services.json
