@@ -6,6 +6,11 @@ export const colors = {
   grey: "#DEDBDB",
 };
 
+export const fontSize = {
+  title: 30,
+  subTitle: 20,
+};
+
 export const darkTheme = {
   background: "#242526",
   color: "white",
