@@ -1,5 +1,6 @@
 export const colors = {
   green: "#317376",
+  secondary: "#FCF0E3",
   yellow: "#F3C23E",
   red: "#DF7171",
   lightgrey: "#D3D3D3",
@@ -9,14 +10,15 @@ export const colors = {
 export const fontSize = {
   title: 30,
   subTitle: 20,
+  input: 17,
 };
 
 export const darkTheme = {
   background: "#242526",
-  color: "white",
+  color: colors.secondary,
 };
 
 export const lightTheme = {
   background: "white",
-  color: "black",
+  color: colors.green,
 };
