@@ -10,6 +10,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Login from "./src/screens/Login/Login";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colors, darkTheme, lightTheme } from "./src/constants/theme";
+import Home from "./src/screens/Home/Home";
+import Messages from "./src/screens/Messages/Messages";
+import Settings from "./src/screens/Settings/Settings";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,14 +27,12 @@ function Tabs(props) {
           if (route.name === "Home") {
             // eslint-disable-next-line prettier/prettier
             iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Wallet") {
-            iconName = focused ? "wallet" : "wallet-outline";
-          } else if (route.name === "Profile") {
-            iconName = focused ? "person-circle" : "person-circle-outline";
-          } else if (route.name === "Community") {
-            iconName = focused ? "earth" : "earth-outline";
-          } else if (route.name === "Discover") {
-            iconName = focused ? "search" : "search-outline";
+          } else if (route.name === "Messages") {
+            iconName = focused ? "chatbubbles-sharp" : "chatbubbles-outline";
+          } else if (route.name === "Settings") {
+            iconName = focused ? "settings" : "settings-outline";
+          } else if (route.name === "Routes") {
+            iconName = focused ? "location" : "location-outline";
           }
 
           // You can return any component that you like here!
@@ -79,8 +80,28 @@ function Tabs(props) {
         }}
       />
       <Tab.Screen
-        name="Home2"
-        component={AuthStack}
+        name="Routes"
+        component={RouteStack}
+        options={{
+          headerShown: false,
+        }}
+        navigationOptions={{
+          gestureEnabled: false,
+        }}
+      />
+      <Tab.Screen
+        name="Messages"
+        component={MessageStack}
+        options={{
+          headerShown: false,
+        }}
+        navigationOptions={{
+          gestureEnabled: false,
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStack}
         options={{
           headerShown: false,
         }}
@@ -96,7 +117,50 @@ const AuthStack = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Login"
-        component={Login}
+        component={Home}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const MessageStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Messages"
+        component={Messages}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const SettingsStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const RouteStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Routes"
+        component={Settings}
         options={{
           headerShown: false,
           gestureEnabled: false,
@@ -132,6 +196,14 @@ function App(props) {
         <Stack.Screen
           name="Home"
           component={Tabs}
+          options={{
+            headerShown: false,
+            gestureEnabled: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
           options={{
             headerShown: false,
             gestureEnabled: false,
