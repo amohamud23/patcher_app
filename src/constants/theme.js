@@ -1,3 +1,17 @@
 export const colors = {
-  green: "",
+  green: "#317376",
+  yellow: "#F3C23E",
+  red: "#DF7171",
+  lightgrey: "#D3D3D3",
+  grey: "#DEDBDB",
+};
+
+export const darkTheme = {
+  background: "#242526",
+  color: "white",
+};
+
+export const lightTheme = {
+  background: "white",
+  color: "black",
 };
