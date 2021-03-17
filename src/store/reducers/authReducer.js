@@ -13,11 +13,13 @@ const defaultState = {
   city: null,
   state: null,
   zipcode: null,
+  status: null,
 };
 const authReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "AUTH_SUCCESS":
-      state.email = action.payload.firstname;
+      state.email = action.payload.email;
+      state.status = "Successfully Signed In";
 
       return { ...state };
 
