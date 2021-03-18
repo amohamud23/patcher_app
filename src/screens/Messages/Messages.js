@@ -1,8 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { View } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import Text from "../../components/Text/Text";
 import Wrapper from "../../components/Wrapper/Wrapper";
+import ChatBubble from "../../components/ChatBubble/ChatBubble";
+
+const renderInputToolbar = (props) => {
+  return <InputToolbar {...props} containerStyle={{ borderRadius: 10 }} />;
+};
 
 function Messages() {
   const [messages, setMessages] = useState([]);
@@ -31,7 +36,8 @@ function Messages() {
   return (
     <Wrapper>
       <GiftedChat
-        renderBubble={}
+        renderBubble={ChatBubble}
+        renderInputToolbar={renderInputToolbar}
         messages={messages}
         onSend={(messages) => onSend(messages)}
         user={{
