@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Switch, StatusBar } from "react-native";
 import Wrapper from "./src/components/Wrapper/Wrapper";
 import { changeTheme } from "./src/store/actions/appConfigActions";
@@ -8,10 +8,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login/Login";
 import Tabs from "./src/components/TabBar/TabBar";
+import { getInbox, getRoutes } from "./src/store/actions/driverAction";
 
 const Stack = createStackNavigator();
 
 function App(props) {
+  const { loadInbox, loadRoutes, id } = props;
+  useEffect(() => {
+    loadInbox(id);
+    loadRoutes(id);
+  }, []);
   return (
     // <Wrapper>
     //   <StatusBar
@@ -75,6 +81,8 @@ function App(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
     setTheme: (theme) => dispatch(changeTheme(theme)),
+    loadInbox: (id) => dispatch(getInbox(id)),
+    loadRoutes: (id) => dispatch(getRoutes(id)),
   };
 };
 
