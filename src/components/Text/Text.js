@@ -6,7 +6,15 @@ import { darkTheme, lightTheme } from "../../constants/theme";
 function FontText(props) {
   const theme = props.theme === "light" ? lightTheme : darkTheme;
   return (
-    <Text {...props} style={[props.style, { color: theme.color }]}>
+    <Text
+      {...props}
+      style={[
+        props.style,
+        props.style === undefined || props.style.color === undefined
+          ? { color: theme.color }
+          : null,
+      ]}
+    >
       {props.children}
     </Text>
   );
