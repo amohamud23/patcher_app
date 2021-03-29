@@ -5,6 +5,6 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const GET_INBOX = "GET_INBOX";
 export const GET_ROUTES = "GET_ROUTES";
 export const COMPLETED_ROUTE = "COMPLETED_ROUTE";
-export const SENT_MESSAGE = "SENT_MESSAGE";
+export const SEND_MESSAGE = "SEND_MESSAGE";
 export const GET_DISPATCHERS = "GET_DISPATCHERS";
 export const GET_MESSAGES = "GET_MESSAGES";
