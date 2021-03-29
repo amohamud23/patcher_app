@@ -5,6 +5,7 @@ export const colors = {
   red: "#DF7171",
   lightgrey: "#D3D3D3",
   grey: "#DEDBDB",
+  darkGrey: "#292929",
 };
 
 export const fontSize = {
@@ -16,9 +17,28 @@ export const fontSize = {
 export const darkTheme = {
   background: "#242526",
   color: colors.secondary,
+  cardBackground: {
+    backgroundColor: colors.darkGrey,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 10,
+  },
 };
 
 export const lightTheme = {
   background: "white",
   color: colors.green,
+  cardBackground: {
+    backgroundColor: "white",
+    shadowColor: colors.green,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+  },
 };
