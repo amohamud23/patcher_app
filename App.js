@@ -8,15 +8,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/screens/Login/Login";
 import Tabs from "./src/components/TabBar/TabBar";
-import { getInbox, getRoutes } from "./src/store/actions/driverAction";
+import {
+  getInbox,
+  getRoutes,
+  getDispatchers,
+} from "./src/store/actions/driverAction";
 
 const Stack = createStackNavigator();
 
 function App(props) {
-  const { loadInbox, loadRoutes, id } = props;
+  const { loadInbox, loadRoutes, id, loadDispatchers, companyID } = props;
   useEffect(() => {
     loadInbox(id);
     loadRoutes(id);
+    loadDispatchers(companyID);
   }, []);
   return (
     // <Wrapper>
@@ -83,6 +88,7 @@ const mapDispatchToProps = (dispatch) => {
     setTheme: (theme) => dispatch(changeTheme(theme)),
     loadInbox: (id) => dispatch(getInbox(id)),
     loadRoutes: (id) => dispatch(getRoutes(id)),
+    loadDispatchers: (id) => dispatch(getDispatchers(id)),
   };
 };
 
@@ -90,6 +96,7 @@ const mapStateToProps = (state) => {
   return {
     theme: state.appConfigReducer.theme,
     id: state.authReducer.id,
+    companyID: state.authReducer.companyID,
   };
 };
 
