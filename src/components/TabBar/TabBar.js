@@ -7,6 +7,7 @@ import Messages from "../../screens/Messages/Messages";
 import Inbox from "../../screens/Inbox/Inbox";
 import Settings from "../../screens/Settings/Settings";
 import Routes from "../../screens/Routes/Routes";
+import RouteDetail from "../../screens/RouteDetail/RouteDetail";
 import { createStackNavigator } from "@react-navigation/stack";
 import { connect } from "react-redux";
 
@@ -163,6 +164,14 @@ const RouteStack = () => {
       <Stack.Screen
         name="Routes"
         component={Routes}
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="RouteDetail"
+        component={RouteDetail}
         options={{
           headerShown: false,
           gestureEnabled: false,
