@@ -14,7 +14,7 @@ import Entypo from "react-native-vector-icons/Entypo";
 import { colors, darkTheme, lightTheme, fontSize } from "../../constants/theme";
 import InboxItem from "../../components/InboxItem/InboxItem";
 import { nanoid } from "nanoid";
-import { selectMessage } from "../../store/actions/driverAction";
+import { selectMessage, newMessage } from "../../store/actions/driverAction";
 import firestore from "@react-native-firebase/firestore";
 
 const messages = [
@@ -77,7 +77,7 @@ function Inbox(props) {
         avatar={item.recipient_avatar}
         message={item.lastMessage}
         time={item.createdAt}
-        employeeType={item.recipient_employeeType}
+        employeeType={item.sender_employeeType}
         badge={item.unread}
         onPress={() => onSelectInbox(index)}
       />
@@ -87,8 +87,9 @@ function Inbox(props) {
   const onNewMessage = (contact) => {
     setModalVisible(false);
     setFilterContacts([]);
+    props.createNewMessage(contact, props.user, contact.avatar);
     props.navigation.navigate("Messages", {
-      recipient_name: contact.name,
+      recipient: contact,
     });
   };
 
@@ -97,11 +98,15 @@ function Inbox(props) {
       index,
       props.selectedInbox,
       props.inboxes[index].sender_id,
-      props.id,
+      props.user,
       props.inboxes[index].recipient_avatar
     );
     props.navigation.navigate("Messages", {
-      recipient_name: props.inboxes[index].recipient_name,
+      recipient: {
+        name: props.inboxes[index].recipient_name,
+        id: props.inboxes[index].recipient_id,
+        avatar: props.inboxes[index].recipient_avatar,
+      },
     });
   };
 
@@ -193,10 +198,10 @@ function Inbox(props) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectMessage: (selectIndex, oldIndex, senderID, driverID, avatar) =>
-      dispatch(
-        selectMessage(selectIndex, oldIndex, senderID, driverID, avatar)
-      ),
+    selectMessage: (selectIndex, oldIndex, sender, recipient, avatar) =>
+      dispatch(selectMessage(selectIndex, oldIndex, sender, recipient, avatar)),
+    createNewMessage: (sender, recipient, avatar) =>
+      dispatch(newMessage(sender, recipient, avatar)),
   };
 };
 
@@ -205,7 +210,7 @@ const mapStateToProps = (state) => {
     theme: state.appConfigReducer.theme,
     inboxes: state.driverReducer.inbox,
     selectedInbox: state.driverReducer.selectedInbox,
-    id: state.authReducer.id,
+    user: state.authReducer,
     companyID: state.authReducer.companyID,
   };
 };
