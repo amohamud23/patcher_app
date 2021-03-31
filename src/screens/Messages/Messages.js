@@ -7,6 +7,7 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 import ChatBubble from "../../components/ChatBubble/ChatBubble";
 import { colors } from "../../constants/theme";
 import { connect } from "react-redux";
+import { sendMessage } from "../../store/actions/driverAction";
 
 const renderInputToolbar = (props) => {
   return <InputToolbar {...props} containerStyle={{ borderRadius: 10 }} />;
@@ -34,19 +35,20 @@ function Messages(props) {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
+    props.sendMsg(recipient, props.user, messages[0].text);
   }, []);
-  const { recipient_name } = props.route.params;
+  const { recipient } = props.route.params;
   return (
     <Wrapper>
       <Ionicons
         style={styles.backIcon}
         onPress={() => props.navigation.goBack()}
-        name="md-chevron-back-sharp"
+        name="chevron-back"
         color={colors.green}
         size={30}
       />
       <View style={styles.header}>
-        <Text style={styles.message_to}>{recipient_name}</Text>
+        <Text style={styles.message_to}>{recipient.name}</Text>
       </View>
       <View style={styles.messageContainer}>
         <GiftedChat
@@ -56,6 +58,7 @@ function Messages(props) {
           onSend={(messages) => onSend(messages)}
           user={{
             _id: 1,
+            avatar: recipient.avatar,
           }}
         />
       </View>
@@ -63,14 +66,21 @@ function Messages(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    messages: state.driverReducer.messages,
-    id: state.authReducer.id,
+    sendMsg: (recipient, sender, message) =>
+      dispatch(sendMessage(recipient, sender, message)),
   };
 };
 
-export default connect(mapStateToProps)(Messages);
+const mapStateToProps = (state) => {
+  return {
+    messages: state.driverReducer.messages,
+    user: state.authReducer,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);
 
 const styles = StyleSheet.create({
   header: {
